@@ -3,7 +3,7 @@ guid: 2449142740ede24459f81965e45dc89a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -74,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -86,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -110,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -122,6 +129,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1104,57 +1112,56 @@ TextureImporter:
     weights: []
     secondaryTextures:
     - texture: {fileID: 2800000, guid: b3bb93284b5386448b733ffef5953e34, type: 3}
-      name: _Normal Map
+      name: _NormalMap
     nameFileIdTable:
-      tiles_45: -1466463287
-      tiles_44: 1059285974
-      tiles_33: -489695917
-      tiles_28: 2094600582
-      tiles_40: -536847203
-      tiles_5: 1726003680
-      tiles_14: 1709207925
-      tiles_19: 1301121244
-      tiles_27: 1062763074
-      tiles_41: 1543993506
-      tiles_6: -1923661144
-      tiles_35: -1333323584
-      tiles_43: -2121598700
-      tiles_16: 1044031115
-      tiles_4: 1466041006
-      tiles_21: 891501784
-      tiles_42: -1629257698
-      tiles_8: -1565819786
-      tiles_36: 40169166
-      tiles_24: -1724415456
-      tiles_13: -274655415
-      tiles_2: 1063328614
-      tiles_29: -1302329286
-      tiles_17: 1722083042
-      tiles_7: -1401646051
-      tiles_9: 1153493026
-      tiles_38: 1532500700
-      tiles_34: -786509848
-      tiles_32: 978870947
-      tiles_22: -95262045
-      tiles_11: 319525259
-      tiles_18: 1986258223
-      tiles_1: 639773850
-      tiles_20: 1184759315
-      tiles_3: -1982860323
-      tiles_26: -999049397
-      tiles_39: 1294951219
-      tiles_31: 881402964
-      tiles_15: -1567696490
       tiles_0: -1199187050
-      tiles_37: 2083509281
+      tiles_1: 639773850
       tiles_10: -789015372
-      tiles_23: -505262657
+      tiles_11: 319525259
       tiles_12: -121361046
-      tiles_30: 1520957245
+      tiles_13: -274655415
+      tiles_14: 1709207925
+      tiles_15: -1567696490
+      tiles_16: 1044031115
+      tiles_17: 1722083042
+      tiles_18: 1986258223
+      tiles_19: 1301121244
+      tiles_2: 1063328614
+      tiles_20: 1184759315
+      tiles_21: 891501784
+      tiles_22: -95262045
+      tiles_23: -505262657
+      tiles_24: -1724415456
       tiles_25: -1272986392
-  spritePackingTag: 
+      tiles_26: -999049397
+      tiles_27: 1062763074
+      tiles_28: 2094600582
+      tiles_29: -1302329286
+      tiles_3: -1982860323
+      tiles_30: 1520957245
+      tiles_31: 881402964
+      tiles_32: 978870947
+      tiles_33: -489695917
+      tiles_34: -786509848
+      tiles_35: -1333323584
+      tiles_36: 40169166
+      tiles_37: 2083509281
+      tiles_38: 1532500700
+      tiles_39: 1294951219
+      tiles_4: 1466041006
+      tiles_40: -536847203
+      tiles_41: 1543993506
+      tiles_42: -1629257698
+      tiles_43: -2121598700
+      tiles_44: 1059285974
+      tiles_45: -1466463287
+      tiles_5: 1726003680
+      tiles_6: -1923661144
+      tiles_7: -1401646051
+      tiles_8: -1565819786
+      tiles_9: 1153493026
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -3,11 +3,11 @@ guid: b3bb93284b5386448b733ffef5953e34
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
-    sRGBTexture: 1
+    enableMipMap: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 1
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -51,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 1
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -63,6 +64,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -74,6 +77,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -86,6 +90,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,6 +103,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -110,6 +116,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -122,6 +129,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -663,34 +671,33 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tilesNormalMap_12: -411054470
-      tilesNormalMap_21: 1838952873
-      tilesNormalMap_9: -1330661129
-      tilesNormalMap_2: -468889165
-      tilesNormalMap_4: -923737716
-      tilesNormalMap_19: 1009434111
-      tilesNormalMap_16: -862080233
-      tilesNormalMap_3: -1728170377
-      tilesNormalMap_10: -1905244304
-      tilesNormalMap_7: -927101029
-      tilesNormalMap_14: 826150868
-      tilesNormalMap_24: -123165206
-      tilesNormalMap_23: 1924114237
       tilesNormalMap_0: 261102502
-      tilesNormalMap_20: 31302673
-      tilesNormalMap_13: -361536206
-      tilesNormalMap_17: 1021064473
-      tilesNormalMap_8: -1508660544
-      tilesNormalMap_18: 1189075389
-      tilesNormalMap_22: 1689331853
-      tilesNormalMap_6: -1793807987
-      tilesNormalMap_5: -472143835
-      tilesNormalMap_15: 1337437231
       tilesNormalMap_1: -1187046105
+      tilesNormalMap_10: -1905244304
       tilesNormalMap_11: -1894570167
-  spritePackingTag: 
+      tilesNormalMap_12: -411054470
+      tilesNormalMap_13: -361536206
+      tilesNormalMap_14: 826150868
+      tilesNormalMap_15: 1337437231
+      tilesNormalMap_16: -862080233
+      tilesNormalMap_17: 1021064473
+      tilesNormalMap_18: 1189075389
+      tilesNormalMap_19: 1009434111
+      tilesNormalMap_2: -468889165
+      tilesNormalMap_20: 31302673
+      tilesNormalMap_21: 1838952873
+      tilesNormalMap_22: 1689331853
+      tilesNormalMap_23: 1924114237
+      tilesNormalMap_24: -123165206
+      tilesNormalMap_3: -1728170377
+      tilesNormalMap_4: -923737716
+      tilesNormalMap_5: -472143835
+      tilesNormalMap_6: -1793807987
+      tilesNormalMap_7: -927101029
+      tilesNormalMap_8: -1508660544
+      tilesNormalMap_9: -1330661129
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
