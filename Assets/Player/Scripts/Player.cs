@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
 
     private IEnumerator moveCoroutine;
     private bool isCanMove = true;
-    private LayerMask mask;
 
     public void OnMove(CallbackContext context)
     {
@@ -21,9 +20,21 @@ public class Player : MonoBehaviour
 
         var moveDirection = context.ReadValue<Vector2>().normalized;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, 1, ~mask);
-        if (hit.collider != null)
+        var hits = Physics2D.RaycastAll(transform.position, moveDirection, 1);
+        Debug.DrawRay(transform.position, moveDirection, Color.white, 0.2f);
+
+        foreach (var hit in hits)
+        {
+            if (hit.transform == transform ||
+                hit.collider == null)
+                continue;
+
+            if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
+                iPushed.Push(this, moveDirection);
+
             return;
+
+        }
 
         moveCoroutine = Move(moveDirection);
         StartCoroutine(moveCoroutine);
@@ -37,10 +48,5 @@ public class Player : MonoBehaviour
             .DOMove(targetPosition, moveDuration)
             .OnKill(() => isCanMove = true);
         yield return null;
-    }
-
-    private void Start()
-    {
-        mask = LayerMask.GetMask("Player");
     }
 }
