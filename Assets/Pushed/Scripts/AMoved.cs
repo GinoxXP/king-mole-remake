@@ -28,7 +28,7 @@ public abstract class AMoved : MonoBehaviour, IPushed
         Move(direction);
     }
 
-    public abstract void CantMove();
+    protected abstract void CantMove();
 
-    public abstract void Move(Vector2 direction);
+    protected abstract void Move(Vector2 direction);
 }
