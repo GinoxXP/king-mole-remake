@@ -1,31 +1,15 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Chest : MonoBehaviour, IPushed
+public class Chest : AMoved
 {
-    [SerializeField]
-    private float moveDuration;
 
-    private bool isCanMove = true;
-
-    public void Push(Player player, Vector2 direction)
+    public override void CantMove()
     {
-        if (!isCanMove)
-            return;
+    }
 
-        var hits = Physics2D.RaycastAll(transform.position, direction, 1);
-        Debug.DrawRay(transform.position, direction, Color.cyan, 0.2f);
-
-        foreach (var hit in hits)
-        {
-            if (hit.transform == transform ||
-                hit.collider == null)
-                continue;
-
-            return;
-        }
-
+    public override void Move(Vector2 direction)
+    {
         var targetPosition = transform.position + (Vector3)direction;
         transform
             .DOMove(targetPosition, moveDuration)
