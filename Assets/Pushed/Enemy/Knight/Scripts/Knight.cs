@@ -17,12 +17,7 @@ public class Knight : AEnemy
         if (isDefence)
             return;
 
-        Death();
-    }
-
-    protected override void Death()
-    {
-        Destroy(gameObject);
+        base.CantMove();
     }
 
     protected override void Move(Vector2 direction)
