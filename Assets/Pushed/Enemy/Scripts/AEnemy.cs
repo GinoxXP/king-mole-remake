@@ -1,14 +1,11 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class Chest : AMoved
+public abstract class AEnemy : AMoved
 {
+    protected abstract void Death();
 
-    public override void CantMove()
-    {
-    }
-
-    public override void Move(Vector2 direction)
+    protected override void Move(Vector2 direction)
     {
         var targetPosition = transform.position + (Vector3)direction;
         transform
