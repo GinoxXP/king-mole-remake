@@ -7,7 +7,7 @@ public abstract class AMoved : MonoBehaviour, IPushed
 
     protected bool isCanMove = true;
 
-    public void Push(Player player, Vector2 direction)
+    public virtual void Push(Player player, Vector2 direction)
     {
         if (!isCanMove)
             return;
