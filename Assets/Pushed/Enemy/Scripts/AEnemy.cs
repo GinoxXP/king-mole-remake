@@ -3,7 +3,10 @@ using UnityEngine;
 
 public abstract class AEnemy : AMoved
 {
-    protected abstract void Death();
+    protected virtual void Death()
+    {
+        Destroy(gameObject);
+    }
 
     protected override void Move(Vector2 direction)
     {
@@ -11,5 +14,10 @@ public abstract class AEnemy : AMoved
         transform
             .DOMove(targetPosition, moveDuration)
             .OnKill(() => isCanMove = true);
+    }
+
+    protected override void CantMove()
+    {
+        Death();
     }
 }
