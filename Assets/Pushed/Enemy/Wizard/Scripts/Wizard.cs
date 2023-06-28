@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class Berserker : AEnemy
+public class Wizard : AEnemy
 {
-    private bool isWeak;
+    private static readonly int MAX_SHIELD_STATUS = 2;
+
+    private bool isCanUseShield = true;
+    private int shieldStatus;
 
     protected override void CantMove()
     {
@@ -11,23 +14,27 @@ public class Berserker : AEnemy
 
         base.CantMove();
     }
+
     protected override void Move(Vector2 direction)
     {
         if (!CanInteract())
             return;
 
         base.Move(direction);
-        isWeak = false;
     }
 
     private bool CanInteract()
     {
-        if (!isWeak)
+        if (isCanUseShield)
         {
-            isWeak = true;
+            isCanUseShield = false;
+            shieldStatus = MAX_SHIELD_STATUS;
             return false;
         }
-        else
-            return true;
+
+        if (shieldStatus != 0)
+            return false;
+
+        return true;
     }
 }
