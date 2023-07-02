@@ -1,37 +1,52 @@
+using System;
 using UnityEngine;
 
-public class Wizard : AEnemy
+public class Wizard : AEnemy, IStrokeReceive
 {
     private static readonly int MAX_SHIELD_STATUS = 2;
 
     private bool isCanUseShield = true;
     private int shieldStatus;
 
-    protected override void CantMove()
+    public void OnStroke()
     {
         if (!CanInteract())
+            shieldStatus--;
+    }
+
+    protected override void CantMove()
+    {
+        if (TryActivateShield() || !CanInteract())
             return;
 
         base.CantMove();
     }
 
-    protected override void Move(Vector2 direction)
+    protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
-        if (!CanInteract())
+        if (TryActivateShield() || !CanInteract())
+        {
+            strokeCompleateAction?.Invoke();
             return;
+        }
 
-        base.Move(direction);
+        base.Move(direction, strokeCompleateAction);
     }
 
-    private bool CanInteract()
+    private bool TryActivateShield()
     {
         if (isCanUseShield)
         {
             isCanUseShield = false;
             shieldStatus = MAX_SHIELD_STATUS;
-            return false;
+            return true;
         }
 
+        return false;
+    }
+
+    private bool CanInteract()
+    {
         if (shieldStatus != 0)
             return false;
 

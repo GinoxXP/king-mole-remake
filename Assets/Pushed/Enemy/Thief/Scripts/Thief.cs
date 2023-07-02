@@ -1,11 +1,12 @@
 using DG.Tweening;
+using System;
 using UnityEngine;
 
 public class Thief : AEnemy
 {
     private Vector3 targetPosition;
 
-    public override void Push(Player player, Vector2 direction)
+    public override void Push(Player player, Vector2 direction, Action strokeCompleateAction)
     {
         var hits = Physics2D.RaycastAll(transform.position, direction);
         Debug.DrawRay(transform.position, direction, Color.magenta, 0.2f);
@@ -20,14 +21,18 @@ public class Thief : AEnemy
             break;
         }
 
-        base.Push(player, direction);
+        base.Push(player, direction, strokeCompleateAction);
     }
 
-    protected override void Move(Vector2 direction)
+    protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
         transform
             .DOMove(targetPosition, moveDuration)
-            .OnKill(() => isCanMove = true);
+            .OnKill(() =>
+            {
+                isCanMove = true;
+                strokeCompleateAction.Invoke();
+            });
     }
 
     private Vector3 RoundVector(Vector3 point, Vector2 direction)
