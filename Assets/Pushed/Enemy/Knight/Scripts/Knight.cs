@@ -1,7 +1,13 @@
 using UnityEngine;
+using Zenject;
 
 public class Knight : AEnemy
 {
+    private ClassicMode classicMode;
+
+    [SerializeField]
+    private GameObject shield;
+
     private bool isDefence;
 
     public void ChangeDefence(bool? state = null)
@@ -10,6 +16,8 @@ public class Knight : AEnemy
             isDefence = state.Value;
         else
             isDefence = !isDefence;
+
+        shield.SetActive(isDefence);
     }
 
     protected override void CantMove()
@@ -26,5 +34,27 @@ public class Knight : AEnemy
             return;
 
         base.Move(direction);
+    }
+
+    private void OnStrokeCompleated()
+    {
+        ChangeDefence();
+    }
+
+    private void OnDestroy()
+    {
+        classicMode.OnStroke -= OnStrokeCompleated;
+    }
+
+    private void Start()
+    {
+        shield.SetActive(isDefence);
+    }
+
+    [Inject]
+    private void Init(ClassicMode classicMode)
+    {
+        this.classicMode = classicMode;
+        classicMode.OnStroke += OnStrokeCompleated;
     }
 }
