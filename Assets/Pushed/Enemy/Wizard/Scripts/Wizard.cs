@@ -25,7 +25,10 @@ public class Wizard : AEnemy, IStrokeReceive
     protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
         if (TryActivateShield() || !CanInteract())
+        {
+            strokeCompleateAction?.Invoke();
             return;
+        }
 
         base.Move(direction, strokeCompleateAction);
     }
