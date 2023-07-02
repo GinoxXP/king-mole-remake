@@ -21,8 +21,11 @@ public abstract class AMoved : MonoBehaviour, IPushed
                 hit.collider == null)
                 continue;
 
-            CantMove();
-            return;
+            if (hit.collider.tag == "Wall")
+            {
+                CantMove();
+                return;
+            }
         }
 
         Move(direction);
