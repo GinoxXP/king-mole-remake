@@ -1,16 +1,13 @@
 using UnityEngine;
-using Zenject;
 
-public class Knight : AEnemy
+public class Knight : AEnemy, IStrokeReceive
 {
-    private ClassicMode classicMode;
-
     [SerializeField]
     private GameObject shield;
 
     private bool isDefence;
 
-    public void ChangeDefence(bool? state = null)
+    public void ChangeState(bool? state = null)
     {
         if (state.HasValue)
             isDefence = state.Value;
@@ -36,25 +33,13 @@ public class Knight : AEnemy
         base.Move(direction);
     }
 
-    private void OnStrokeCompleated()
-    {
-        ChangeDefence();
-    }
-
-    private void OnDestroy()
-    {
-        classicMode.OnStroke -= OnStrokeCompleated;
-    }
-
     private void Start()
     {
         shield.SetActive(isDefence);
     }
 
-    [Inject]
-    private void Init(ClassicMode classicMode)
+    public void OnStroke()
     {
-        this.classicMode = classicMode;
-        classicMode.OnStroke += OnStrokeCompleated;
+        ChangeState();
     }
 }

@@ -1,10 +1,7 @@
 using UnityEngine;
-using Zenject;
 
-public class Spikes : MonoBehaviour
+public class Spikes : MonoBehaviour, IStrokeReceive
 {
-    private ClassicMode classicMode;
-
     [SerializeField]
     private bool isActivated;
     [SerializeField]
@@ -12,9 +9,15 @@ public class Spikes : MonoBehaviour
     [SerializeField]
     private GameObject deactivatedState;
 
-    private void OnDestroy()
+    public void ChangeState(bool? state = null)
     {
-        classicMode.OnStroke -= OnStrokeCompleated;
+        if (state.HasValue)
+            isActivated = state.Value;
+        else
+            isActivated = !isActivated;
+
+        activatedState.SetActive(isActivated);
+        deactivatedState.SetActive(!isActivated);
     }
 
     private void Start()
@@ -23,18 +26,8 @@ public class Spikes : MonoBehaviour
         deactivatedState.SetActive(!isActivated);
     }
 
-    [Inject]
-    private void Init(ClassicMode classicMode)
+    public void OnStroke()
     {
-        this.classicMode = classicMode;
-        classicMode.OnStroke += OnStrokeCompleated;
-    }
-
-    private void OnStrokeCompleated()
-    {
-        isActivated = !isActivated;
-
-        activatedState.SetActive(isActivated);
-        deactivatedState.SetActive(!isActivated);
+        ChangeState();
     }
 }

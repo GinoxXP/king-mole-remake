@@ -1,12 +1,13 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class ClassicMode : MonoBehaviour
 {
-    private Player player;
+    private IStrokeReceive[] iStrokeReceivers;
 
-    public event Action OnStroke;
+    private Player player;
 
     [SerializeField]
     private int maxStrokes;
@@ -15,7 +16,8 @@ public class ClassicMode : MonoBehaviour
 
     private void OnStrokeCompleated()
     {
-        OnStroke?.Invoke();
+        foreach (var iStrokeReceiver in iStrokeReceivers)
+            iStrokeReceiver.OnStroke();
 
         if (strokes == 0)
             Debug.Log("Player death");
@@ -32,6 +34,7 @@ public class ClassicMode : MonoBehaviour
     private void Start()
     {
         strokes = maxStrokes;
+        iStrokeReceivers = FindObjectsOfType<MonoBehaviour>(true).OfType<IStrokeReceive>().ToArray();
     }
 
     [Inject]
