@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class AMoved : MonoBehaviour, IPushed
@@ -7,7 +8,7 @@ public abstract class AMoved : MonoBehaviour, IPushed
 
     protected bool isCanMove = true;
 
-    public virtual void Push(Player player, Vector2 direction)
+    public virtual void Push(Player player, Vector2 direction, Action action)
     {
         if (!isCanMove)
             return;
@@ -24,14 +25,18 @@ public abstract class AMoved : MonoBehaviour, IPushed
             if (hit.collider.tag == "Wall")
             {
                 CantMove();
+                action?.Invoke();
                 return;
             }
         }
 
-        Move(direction);
+        Move(direction, action);
     }
 
     protected abstract void CantMove();
 
-    protected abstract void Move(Vector2 direction);
+    protected virtual void Move(Vector2 direction, Action action)
+    {
+        action?.Invoke();
+    }
 }

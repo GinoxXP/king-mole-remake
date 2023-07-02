@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Berserker : AEnemy
@@ -11,12 +12,15 @@ public class Berserker : AEnemy
 
         base.CantMove();
     }
-    protected override void Move(Vector2 direction)
+    protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
         if (!CanInteract())
+        {
+            strokeCompleateAction?.Invoke();
             return;
+        }
 
-        base.Move(direction);
+        base.Move(direction, strokeCompleateAction);
         isWeak = false;
     }
 

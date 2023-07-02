@@ -9,6 +9,8 @@ public class Spikes : MonoBehaviour, IStrokeReceive
     [SerializeField]
     private GameObject deactivatedState;
 
+    private bool isPlayerStayOnSpikes;
+
     public void ChangeState(bool? state = null)
     {
         if (state.HasValue)
@@ -18,6 +20,20 @@ public class Spikes : MonoBehaviour, IStrokeReceive
 
         activatedState.SetActive(isActivated);
         deactivatedState.SetActive(!isActivated);
+
+        Debug.Log(isPlayerStayOnSpikes && isActivated);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<Player>(out var _))
+            isPlayerStayOnSpikes = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<Player>(out var _))
+            isPlayerStayOnSpikes = false;
     }
 
     private void Start()

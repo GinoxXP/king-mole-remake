@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Knight : AEnemy, IStrokeReceive
@@ -25,12 +26,12 @@ public class Knight : AEnemy, IStrokeReceive
         base.CantMove();
     }
 
-    protected override void Move(Vector2 direction)
+    protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
         if (isDefence)
             return;
 
-        base.Move(direction);
+        base.Move(direction, strokeCompleateAction);
     }
 
     private void Start()

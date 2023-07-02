@@ -35,15 +35,12 @@ public class Player : MonoBehaviour
 
             if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
             {
-                iPushed.Push(this, moveDirection);
-                OnStroke?.Invoke();
+                iPushed.Push(this, moveDirection, () => OnStroke?.Invoke());
                 return;
             }
         }
 
         Move(moveDirection);
-
-        OnStroke?.Invoke();
     }
 
     private void Move(Vector2 moveDirection)
@@ -52,6 +49,10 @@ public class Player : MonoBehaviour
         var targetPosition = transform.position + (Vector3)moveDirection;
         transform
             .DOMove(targetPosition, moveDuration)
-            .OnKill(() => isCanMove = true);
+            .OnKill(() =>
+            {
+                isCanMove = true;
+                OnStroke?.Invoke();
+            });
     }
 }
