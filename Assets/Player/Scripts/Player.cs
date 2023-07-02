@@ -1,5 +1,5 @@
 using DG.Tweening;
-using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
@@ -9,8 +9,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveDuration;
 
-    private IEnumerator moveCoroutine;
     private bool isCanMove = true;
+
+    public event Action OnStroke;
 
     public void OnMove(CallbackContext context)
     {
@@ -32,21 +33,22 @@ public class Player : MonoBehaviour
             if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
                 iPushed.Push(this, moveDirection);
 
+            OnStroke?.Invoke();
             return;
 
         }
 
-        moveCoroutine = Move(moveDirection);
-        StartCoroutine(moveCoroutine);
+        Move(moveDirection);
+
+        OnStroke?.Invoke();
     }
 
-    private IEnumerator Move(Vector2 moveDirection)
+    private void Move(Vector2 moveDirection)
     {
         isCanMove = false;
         var targetPosition = transform.position + (Vector3)moveDirection;
         transform
             .DOMove(targetPosition, moveDuration)
             .OnKill(() => isCanMove = true);
-        yield return null;
     }
 }
