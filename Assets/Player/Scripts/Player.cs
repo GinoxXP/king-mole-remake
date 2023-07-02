@@ -30,12 +30,15 @@ public class Player : MonoBehaviour
                 hit.collider == null)
                 continue;
 
+            if (hit.collider.tag == "Wall")
+                return;
+
             if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
+            {
                 iPushed.Push(this, moveDirection);
-
-            OnStroke?.Invoke();
-            return;
-
+                OnStroke?.Invoke();
+                return;
+            }
         }
 
         Move(moveDirection);
