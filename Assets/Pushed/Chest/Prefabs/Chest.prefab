@@ -11,18 +11,18 @@ PrefabInstance:
     - target: {fileID: 2035798178410824374, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1982860323, guid: 2449142740ede24459f81965e45dc89a, type: 3}
+      objectReference: {fileID: 21300000, guid: 462c34e1da114484783113fad7b9e40f, type: 3}
     - target: {fileID: 2035798178410824374, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3100670348195864627, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_Name
-      value: Pushed Object Variant
+      value: Chest
       objectReference: {fileID: 0}
     - target: {fileID: 7298793718526896115, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_InstanceId
-      value: -29642
+      value: -2840
       objectReference: {fileID: 0}
     - target: {fileID: 7298793718526896115, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_ShapePathHash
@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8632373935560358612, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8632373935560358612, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_LocalPosition.x
