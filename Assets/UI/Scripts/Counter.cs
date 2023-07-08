@@ -9,23 +9,23 @@ public class Counter : MonoBehaviour
 
     private TMP_Text counter;
 
-    private void OnStrokeCompleated(int strokes)
+    private void OnStrokeStarted(int strokes)
         => counter.text = strokes.ToString();
 
     private void Start()
     {
         counter = GetComponent<TMP_Text>();
-        classicMode.StrokeCompleated += OnStrokeCompleated;
     }
 
     private void OnDestroy()
     {
-        classicMode.StrokeCompleated -= OnStrokeCompleated;
+        classicMode.StrokeStarted -= OnStrokeStarted;
     }
 
     [Inject]
     private void Init(ClassicMode classicMode)
     {
         this.classicMode = classicMode;
+        classicMode.StrokeStarted += OnStrokeStarted;
     }
 }

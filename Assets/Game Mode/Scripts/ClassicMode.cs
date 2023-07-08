@@ -15,7 +15,14 @@ public class ClassicMode : MonoBehaviour
 
     private int strokes;
 
+    public event Action<int> StrokeStarted;
+
     public event Action<int> StrokeCompleated;
+
+    private void OnStrokeStarted()
+    {
+        StrokeStarted?.Invoke(strokes);
+    }
 
     private void OnStrokeCompleated()
     {
@@ -32,7 +39,7 @@ public class ClassicMode : MonoBehaviour
 
     private void OnDestroy()
     {
-        player.OnStroke -= OnStrokeCompleated;
+        player.StrokeCompleated -= OnStrokeCompleated;
     }
 
     private void Start()
@@ -47,6 +54,7 @@ public class ClassicMode : MonoBehaviour
         this.player = player;
         this.loadScene = loadScene;
 
-        player.OnStroke += OnStrokeCompleated;
+        player.StrokeStarted += OnStrokeStarted;
+        player.StrokeCompleated += OnStrokeCompleated;
     }
 }
