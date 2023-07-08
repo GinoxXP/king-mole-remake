@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -8,6 +7,7 @@ public class ClassicMode : MonoBehaviour
     private IStrokeReceive[] iStrokeReceivers;
 
     private Player player;
+    private LoadScene loadScene;
 
     [SerializeField]
     private int maxStrokes;
@@ -19,11 +19,10 @@ public class ClassicMode : MonoBehaviour
         foreach (var iStrokeReceiver in iStrokeReceivers)
             iStrokeReceiver.OnStroke();
 
-        if (strokes == 0)
-            Debug.Log("Player death");
+        if (strokes <= 0)
+            loadScene.Reload();
 
         strokes--;
-        Debug.Log($"Strokes: {strokes}");
     }
 
     private void OnDestroy()
@@ -38,9 +37,11 @@ public class ClassicMode : MonoBehaviour
     }
 
     [Inject]
-    private void Init(Player player)
+    private void Init(Player player, LoadScene loadScene)
     {
         this.player = player;
+        this.loadScene = loadScene;
+
         player.OnStroke += OnStrokeCompleated;
     }
 }
