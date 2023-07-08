@@ -30,7 +30,10 @@ public class ClassicMode : MonoBehaviour
             iStrokeReceiver.OnStroke();
 
         if (strokes <= 0)
+        {
             loadScene.Reload();
+            player.IsCanMove = false;
+        }
 
         strokes--;
 

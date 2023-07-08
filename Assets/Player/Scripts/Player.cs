@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveDuration;
 
-    private bool isCanMove = true;
+    public bool IsCanMove { get; set; } = true;
 
     public event Action StrokeStarted;
 
@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public void OnMove(CallbackContext context)
     {
         if (context.phase != InputActionPhase.Started ||
-            !isCanMove)
+            !IsCanMove)
             return;
 
         var moveDirection = context.ReadValue<Vector2>().normalized;
@@ -51,13 +51,13 @@ public class Player : MonoBehaviour
     {
         StrokeStarted?.Invoke();
 
-        isCanMove = false;
+        IsCanMove = false;
         var targetPosition = transform.position + (Vector3)moveDirection;
         transform
             .DOMove(targetPosition, moveDuration)
             .OnKill(() =>
             {
-                isCanMove = true;
+                IsCanMove = true;
                 StrokeCompleated?.Invoke();
             });
     }
