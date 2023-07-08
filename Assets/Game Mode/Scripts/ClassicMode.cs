@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -14,6 +15,8 @@ public class ClassicMode : MonoBehaviour
 
     private int strokes;
 
+    public event Action<int> StrokeCompleated;
+
     private void OnStrokeCompleated()
     {
         foreach (var iStrokeReceiver in iStrokeReceivers)
@@ -23,6 +26,8 @@ public class ClassicMode : MonoBehaviour
             loadScene.Reload();
 
         strokes--;
+
+        StrokeCompleated?.Invoke(strokes);
     }
 
     private void OnDestroy()
