@@ -11,8 +11,6 @@ public class Player : MonoBehaviour
 
     public bool IsCanMove { get; set; } = true;
 
-    public event Action StrokeStarted;
-
     public event Action StrokeCompleated;
 
     public void OnMove(CallbackContext context)
@@ -37,8 +35,6 @@ public class Player : MonoBehaviour
 
             if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
             {
-                StrokeStarted?.Invoke();
-
                 iPushed.Push(this, moveDirection, () => StrokeCompleated?.Invoke());
                 return;
             }
@@ -49,8 +45,6 @@ public class Player : MonoBehaviour
 
     private void Move(Vector2 moveDirection)
     {
-        StrokeStarted?.Invoke();
-
         IsCanMove = false;
         var targetPosition = transform.position + (Vector3)moveDirection;
         transform
