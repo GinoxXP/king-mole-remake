@@ -2,10 +2,13 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 
-public abstract class AEnemy : AMoved
+public abstract class AEnemy : AMoved, IVictoryCondition
 {
+    public event Action<IVictoryCondition> ConditionMet;
+
     protected virtual void Death()
     {
+        ConditionMet?.Invoke(this);
         Destroy(gameObject);
     }
 

@@ -9,14 +9,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float moveDuration;
 
-    private bool isCanMove = true;
+    public bool IsCanMove { get; set; } = true;
 
-    public event Action OnStroke;
+    public event Action StrokeStarted;
+
+    public event Action StrokeCompleated;
 
     public void OnMove(CallbackContext context)
     {
         if (context.phase != InputActionPhase.Started ||
-            !isCanMove)
+            !IsCanMove)
             return;
 
         var moveDirection = context.ReadValue<Vector2>().normalized;
@@ -35,7 +37,9 @@ public class Player : MonoBehaviour
 
             if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
             {
-                iPushed.Push(this, moveDirection, () => OnStroke?.Invoke());
+                StrokeStarted?.Invoke();
+
+                iPushed.Push(this, moveDirection, () => StrokeCompleated?.Invoke());
                 return;
             }
         }
@@ -45,14 +49,16 @@ public class Player : MonoBehaviour
 
     private void Move(Vector2 moveDirection)
     {
-        isCanMove = false;
+        StrokeStarted?.Invoke();
+
+        IsCanMove = false;
         var targetPosition = transform.position + (Vector3)moveDirection;
         transform
             .DOMove(targetPosition, moveDuration)
             .OnKill(() =>
             {
-                isCanMove = true;
-                OnStroke?.Invoke();
+                IsCanMove = true;
+                StrokeCompleated?.Invoke();
             });
     }
 }

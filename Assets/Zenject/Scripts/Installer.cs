@@ -6,5 +6,6 @@ public class Installer : MonoInstaller
     {
         Container.Bind<Player>().FromComponentInHierarchy().AsSingle();
         Container.Bind<ClassicMode>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<LoadScene>().FromComponentInHierarchy().AsSingle();
     }
 }
