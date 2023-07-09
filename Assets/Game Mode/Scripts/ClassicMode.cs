@@ -13,15 +13,15 @@ public class ClassicMode : MonoBehaviour
     [SerializeField]
     private int maxStrokes;
 
-    private int strokes;
+    public int Strokes { get; private set; }
 
-    public event Action<int> StrokeStarted;
+    public event Action StrokeStarted;
 
-    public event Action<int> StrokeCompleated;
+    public event Action StrokeCompleated;
 
     private void OnStrokeStarted()
     {
-        StrokeStarted?.Invoke(strokes);
+        StrokeStarted?.Invoke();
     }
 
     private void OnStrokeCompleated()
@@ -29,15 +29,15 @@ public class ClassicMode : MonoBehaviour
         foreach (var iStrokeReceiver in iStrokeReceivers)
             iStrokeReceiver.OnStroke();
 
-        if (strokes <= 0)
+        if (Strokes <= 0)
         {
             loadScene.Reload();
             player.IsCanMove = false;
         }
 
-        strokes--;
+        Strokes--;
 
-        StrokeCompleated?.Invoke(strokes);
+        StrokeCompleated?.Invoke();
     }
 
     private void OnDestroy()
@@ -47,7 +47,6 @@ public class ClassicMode : MonoBehaviour
 
     private void Start()
     {
-        strokes = maxStrokes;
         iStrokeReceivers = FindObjectsOfType<MonoBehaviour>(true).OfType<IStrokeReceive>().ToArray();
     }
 
@@ -56,6 +55,8 @@ public class ClassicMode : MonoBehaviour
     {
         this.player = player;
         this.loadScene = loadScene;
+
+        Strokes = maxStrokes;
 
         player.StrokeStarted += OnStrokeStarted;
         player.StrokeCompleated += OnStrokeCompleated;
