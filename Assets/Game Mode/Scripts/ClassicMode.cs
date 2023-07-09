@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class ClassicMode : MonoBehaviour
 {
-    private IStrokeReceive[] iStrokeReceivers;
+    private IStrokeReceive[] strokeReceivers;
+    private List<IVictoryCondition> victoryConditions;
 
     private Player player;
     private LoadScene loadScene;
@@ -26,7 +28,7 @@ public class ClassicMode : MonoBehaviour
 
     private void OnStrokeCompleated()
     {
-        foreach (var iStrokeReceiver in iStrokeReceivers)
+        foreach (var iStrokeReceiver in strokeReceivers)
             iStrokeReceiver.OnStroke();
 
         if (Strokes <= 0)
@@ -40,14 +42,33 @@ public class ClassicMode : MonoBehaviour
         StrokeCompleated?.Invoke();
     }
 
+    private void OnVictoryConditionMet(IVictoryCondition victoryCondition)
+    {
+        victoryCondition.ConditionMet -= OnVictoryConditionMet;
+        victoryConditions.Remove(victoryCondition);
+
+        if(victoryConditions.Count == 0)
+        {
+            loadScene.Load();
+            player.IsCanMove = false;
+        }
+    }
+
     private void OnDestroy()
     {
         player.StrokeCompleated -= OnStrokeCompleated;
+
+        foreach (var condition in victoryConditions)
+            condition.ConditionMet -= OnVictoryConditionMet;
     }
 
     private void Start()
     {
-        iStrokeReceivers = FindObjectsOfType<MonoBehaviour>(true).OfType<IStrokeReceive>().ToArray();
+        strokeReceivers = FindObjectsOfType<MonoBehaviour>(true).OfType<IStrokeReceive>().ToArray();
+        victoryConditions = FindObjectsOfType<MonoBehaviour>(true).OfType<IVictoryCondition>().ToList();
+
+        foreach (var condition in victoryConditions)
+            condition.ConditionMet += OnVictoryConditionMet;
     }
 
     [Inject]
