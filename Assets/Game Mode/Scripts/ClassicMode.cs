@@ -15,13 +15,18 @@ public class ClassicMode : MonoBehaviour
     [SerializeField]
     private int maxStrokes;
 
-    private int strokes;
-
     public int Strokes { get; private set; }
 
-    public event Action StrokesChanged;
+    public event Action StrokeStarted;
 
     public event Action StrokeCompleated;
+
+    private void OnStrokeStarted()
+    {
+        Strokes--;
+
+        StrokeStarted?.Invoke();
+    }
 
     private void OnStrokeCompleated()
     {
@@ -32,8 +37,8 @@ public class ClassicMode : MonoBehaviour
         {
             loadScene.Reload();
             player.IsCanMove = false;
-        }        
-        
+        }
+
         StrokeCompleated?.Invoke();
     }
 
@@ -42,7 +47,7 @@ public class ClassicMode : MonoBehaviour
         victoryCondition.ConditionMet -= OnVictoryConditionMet;
         victoryConditions.Remove(victoryCondition);
 
-        if(victoryConditions.Count == 0)
+        if (victoryConditions.Count == 0)
         {
             loadScene.Load();
             player.IsCanMove = false;
@@ -74,6 +79,7 @@ public class ClassicMode : MonoBehaviour
 
         Strokes = maxStrokes;
 
+        player.StrokeStarted += OnStrokeStarted;
         player.StrokeCompleated += OnStrokeCompleated;
     }
 }

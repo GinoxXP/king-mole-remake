@@ -9,25 +9,24 @@ public class Counter : MonoBehaviour
 
     private TMP_Text counter;
 
-    private void OnStrokesChanged()
+    private void OnStrokeStarted()
         => counter.text = classicMode.Strokes.ToString();
 
     private void Start()
     {
         counter = GetComponent<TMP_Text>();
-        classicMode.StrokesChanged += OnStrokesChanged;
-
-        OnStrokesChanged();
+        OnStrokeStarted();
     }
 
     private void OnDestroy()
     {
-        classicMode.StrokesChanged -= OnStrokesChanged;
+        classicMode.StrokeStarted -= OnStrokeStarted;
     }
 
     [Inject]
     private void Init(ClassicMode classicMode)
     {
         this.classicMode = classicMode;
+        classicMode.StrokeStarted += OnStrokeStarted;
     }
 }
