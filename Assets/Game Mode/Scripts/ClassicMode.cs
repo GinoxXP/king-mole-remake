@@ -23,6 +23,8 @@ public class ClassicMode : MonoBehaviour
 
     private void OnStrokeStarted()
     {
+        Strokes--;
+
         StrokeStarted?.Invoke();
     }
 
@@ -35,10 +37,8 @@ public class ClassicMode : MonoBehaviour
         {
             loadScene.Reload();
             player.IsCanMove = false;
-        }
-
-        Strokes--;
-
+        }        
+        
         StrokeCompleated?.Invoke();
     }
 
