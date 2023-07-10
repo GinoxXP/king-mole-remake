@@ -9,14 +9,26 @@ public class LoadScene : MonoBehaviour
     [SerializeField]
     private string sceneName;
 
+    private bool isOnProgress;
+
     public void Load(bool isPermanent = false)
     {
+        if (isOnProgress)
+            return;
+
+        isOnProgress = true;
+
         var loadCoroutine = LoadCoroutine(isPermanent);
         StartCoroutine(loadCoroutine);
     }
 
     public void Reload(bool isPermanent = false)
     {
+        if (isOnProgress)
+            return;
+
+        isOnProgress = true;
+
         var reloadCoroutine = ReloadCoroutine(isPermanent);
         StartCoroutine(reloadCoroutine);
     }

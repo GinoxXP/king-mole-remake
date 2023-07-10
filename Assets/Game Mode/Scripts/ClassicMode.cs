@@ -17,15 +17,7 @@ public class ClassicMode : MonoBehaviour
 
     private int strokes;
 
-    public int Strokes
-    {
-        get => strokes;
-        set
-        {
-            strokes = value;
-            StrokesChanged?.Invoke();
-        }
-    }
+    public int Strokes { get; private set; }
 
     public event Action StrokesChanged;
 
@@ -33,8 +25,6 @@ public class ClassicMode : MonoBehaviour
 
     private void OnStrokeCompleated()
     {
-        Strokes--;
-
         foreach (var iStrokeReceiver in strokeReceivers)
             iStrokeReceiver.OnStroke();
 
@@ -42,8 +32,8 @@ public class ClassicMode : MonoBehaviour
         {
             loadScene.Reload();
             player.IsCanMove = false;
-        }
-
+        }        
+        
         StrokeCompleated?.Invoke();
     }
 
