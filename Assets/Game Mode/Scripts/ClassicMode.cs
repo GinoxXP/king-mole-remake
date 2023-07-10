@@ -15,18 +15,13 @@ public class ClassicMode : MonoBehaviour
     [SerializeField]
     private int maxStrokes;
 
+    private int strokes;
+
     public int Strokes { get; private set; }
 
-    public event Action StrokeStarted;
+    public event Action StrokesChanged;
 
     public event Action StrokeCompleated;
-
-    private void OnStrokeStarted()
-    {
-        Strokes--;
-
-        StrokeStarted?.Invoke();
-    }
 
     private void OnStrokeCompleated()
     {
@@ -79,7 +74,6 @@ public class ClassicMode : MonoBehaviour
 
         Strokes = maxStrokes;
 
-        player.StrokeStarted += OnStrokeStarted;
         player.StrokeCompleated += OnStrokeCompleated;
     }
 }
