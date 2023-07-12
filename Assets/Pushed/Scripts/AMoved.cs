@@ -22,9 +22,12 @@ public abstract class AMoved : MonoBehaviour, IPushed
                 hit.collider == null)
                 continue;
 
-            CantMove();
-            action?.Invoke();
-            return;
+            if (hit.collider.tag == "Wall" || hit.collider.TryGetComponent<IPushed>(out var iPushed))
+            {
+                CantMove();
+                action?.Invoke();
+                return;
+            }
         }
 
         Move(direction, action);
