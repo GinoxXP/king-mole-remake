@@ -42,6 +42,12 @@ public class ClassicMode : MonoBehaviour
         StrokeCompleated?.Invoke();
     }
 
+    private void OnPlayerDead()
+    {
+        loadScene.Reload();
+        player.IsCanMove = false;
+    }
+
     private void OnVictoryConditionMet(IVictoryCondition victoryCondition)
     {
         victoryCondition.ConditionMet -= OnVictoryConditionMet;
@@ -56,7 +62,9 @@ public class ClassicMode : MonoBehaviour
 
     private void OnDestroy()
     {
+        player.StrokeStarted -= OnStrokeStarted;
         player.StrokeCompleated -= OnStrokeCompleated;
+        player.PlayerDead -= OnPlayerDead;
 
         foreach (var condition in victoryConditions)
             condition.ConditionMet -= OnVictoryConditionMet;
@@ -81,5 +89,6 @@ public class ClassicMode : MonoBehaviour
 
         player.StrokeStarted += OnStrokeStarted;
         player.StrokeCompleated += OnStrokeCompleated;
+        player.PlayerDead += OnPlayerDead;
     }
 }

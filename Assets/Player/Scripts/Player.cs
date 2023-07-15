@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ISpikesStep
 {
     [SerializeField]
     private float moveDuration;
@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public event Action StrokeStarted;
 
     public event Action StrokeCompleated;
+
+    public event Action PlayerDead;
 
     public void OnMove(CallbackContext context)
     {
@@ -45,6 +47,11 @@ public class Player : MonoBehaviour
         }
 
         Move(moveDirection);
+    }
+
+    public void StepOnSpike()
+    {
+        PlayerDead?.Invoke();
     }
 
     private void Move(Vector2 moveDirection)
