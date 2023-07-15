@@ -2,7 +2,7 @@ using DG.Tweening;
 using System;
 using UnityEngine;
 
-public abstract class AEnemy : AMoved, IVictoryCondition
+public abstract class AEnemy : AMoved, IVictoryCondition, ISpikesStep
 {
     public event Action<IVictoryCondition> ConditionMet;
 
@@ -23,6 +23,11 @@ public abstract class AEnemy : AMoved, IVictoryCondition
     }
 
     protected override void CantMove()
+    {
+        Death();
+    }
+
+    public void StepOnSpike()
     {
         Death();
     }
