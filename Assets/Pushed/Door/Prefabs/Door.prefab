@@ -126,14 +126,14 @@ PrefabInstance:
     - target: {fileID: 2035798178410824374, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 639773850, guid: 2449142740ede24459f81965e45dc89a, type: 3}
+      objectReference: {fileID: -1466463287, guid: 2449142740ede24459f81965e45dc89a, type: 3}
     - target: {fileID: 2035798178410824374, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3100670348195864627, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_Name
-      value: Door Variant
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 7298793718526896115, guid: 2c094b81f6b32b54383021443bb46a26, type: 3}
       propertyPath: m_InstanceId

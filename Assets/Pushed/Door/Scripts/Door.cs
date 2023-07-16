@@ -17,8 +17,8 @@ public class Door : MonoBehaviour, IPushed
         else
             isOpen = !isOpen;
 
-        door.SetActive(isOpen);
-        collider.enabled = isOpen;
+        door.SetActive(!isOpen);
+        collider.enabled = !isOpen;
     }
 
     public void Push(Player player, Vector2 direction, Action strokeCompleateAction = null)
