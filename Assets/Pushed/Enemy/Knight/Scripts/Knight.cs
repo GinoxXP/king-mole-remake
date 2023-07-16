@@ -29,7 +29,10 @@ public class Knight : AEnemy, IStrokeReceive
     protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
         if (isDefence)
+        {
+            strokeCompleateAction?.Invoke();
             return;
+        }
 
         base.Move(direction, strokeCompleateAction);
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Spikes : MonoBehaviour, IStrokeReceive
@@ -9,7 +10,7 @@ public class Spikes : MonoBehaviour, IStrokeReceive
     [SerializeField]
     private GameObject deactivatedState;
 
-    private bool isPlayerStayOnSpikes;
+    private ISpikesStep spikesStep;
 
     public void ChangeState(bool? state = null)
     {
@@ -21,19 +22,22 @@ public class Spikes : MonoBehaviour, IStrokeReceive
         activatedState.SetActive(isActivated);
         deactivatedState.SetActive(!isActivated);
 
-        Debug.Log(isPlayerStayOnSpikes && isActivated);
+        if (!isActivated || spikesStep == null)
+            return;
+
+        spikesStep.StepOnSpike();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out var _))
-            isPlayerStayOnSpikes = true;
+        if (collision.TryGetComponent<ISpikesStep>(out var spikesStep))
+            this.spikesStep = spikesStep;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Player>(out var _))
-            isPlayerStayOnSpikes = false;
+        if (collision.TryGetComponent<ISpikesStep>(out var _))
+            spikesStep = null;
     }
 
     private void Start()
