@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using UnityEngine;
 
@@ -35,8 +36,15 @@ public abstract class AMoved : MonoBehaviour, IPushed
 
     protected abstract void CantMove();
 
-    protected virtual void Move(Vector2 direction, Action action)
+    protected virtual void Move(Vector2 direction, Action strokeCompleateAction)
     {
-        action?.Invoke();
+        var targetPosition = transform.position + (Vector3)direction;
+        transform
+            .DOMove(targetPosition, moveDuration)
+            .OnKill(() =>
+            {
+                strokeCompleateAction?.Invoke();
+                isCanMove = true;
+            });
     }
 }
