@@ -4,11 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Door : MonoBehaviour, IPushed
 {
-    [SerializeField]
-    private GameObject door;
     private new BoxCollider2D collider;
 
+    [SerializeField]
+    private GameObject door;
+    [SerializeField]
+    private int id;
+
     private bool isOpen;
+
+    public int ID => id;
 
     public void ChangeState(bool? state = null)
     {

@@ -4,7 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Key : MonoBehaviour
 {
+
     private Door[] doors;
+
+    [SerializeField]
+    private int id;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,6 +25,6 @@ public class Key : MonoBehaviour
 
     private void Start()
     {
-        doors = FindObjectsOfType<Door>(true).ToArray();
+        doors = FindObjectsOfType<Door>(true).Where(x => x.ID == id).ToArray();
     }
 }
