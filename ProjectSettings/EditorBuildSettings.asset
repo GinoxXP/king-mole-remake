@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tests/MovePlayer/Test_MovePlayer_PositionChanged.unity
     guid: 30f8e8093160e47488bcb51f9335a99f
+  - enabled: 1
+    path: Assets/Tests/MovePlayer/Test_MovePlayerWithWallDetect_PositionChange.unity
+    guid: acc06ed911bd98b4ab3676fca9a7a48f
   m_configObjects: {}
