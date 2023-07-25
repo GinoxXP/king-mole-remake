@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tests/MoveEnemy/Test_MovePeasant_PositionChanged.unity
     guid: b9d2feb17e23a6a4baf5b2f9819fd374
+  - enabled: 1
+    path: Assets/Tests/MoveEnemy/Test_KillPeasant_PeasantDeath.unity
+    guid: 5bfd9ec1881fc4845893758b41ccdceb
   m_configObjects: {}

@@ -14,7 +14,7 @@ public class MoveEnemyTests : SceneTestFixture
 
         var player = SceneContainer.Resolve<Player>();
 
-        var peasant = GameObject.FindObjectOfType<Peasant>();
+        var peasant = Object.FindObjectOfType<Peasant>();
 
         player.SetMoveDirection(Vector3.right);
         yield return new WaitForSeconds(1.0f);
@@ -22,5 +22,21 @@ public class MoveEnemyTests : SceneTestFixture
         Assert.IsTrue(
             player.transform.position == Vector3.zero &&
             peasant.transform.position == new Vector3(2, 0));
+    }
+
+    [UnityTest]
+    public IEnumerator KillPeasant_PeasantDeath_FalseReturn()
+    {
+        yield return LoadScene("Test_KillPeasant_PeasantDeath");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var peasant = Object.FindObjectOfType<Peasant>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(peasant == null);
     }
 }
