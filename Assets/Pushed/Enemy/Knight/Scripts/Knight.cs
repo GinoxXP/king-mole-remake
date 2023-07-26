@@ -5,22 +5,24 @@ public class Knight : AEnemy, IStrokeReceive
 {
     [SerializeField]
     private GameObject shield;
+    [SerializeField]
+    private bool isDefense;
 
-    private bool isDefence;
+    public bool IsDefense => isDefense;
 
     public void ChangeState(bool? state = null)
     {
         if (state.HasValue)
-            isDefence = state.Value;
+            isDefense = state.Value;
         else
-            isDefence = !isDefence;
+            isDefense = !isDefense;
 
-        shield.SetActive(isDefence);
+        shield.SetActive(isDefense);
     }
 
     protected override void CantMove()
     {
-        if (isDefence)
+        if (isDefense)
             return;
 
         base.CantMove();
@@ -28,7 +30,7 @@ public class Knight : AEnemy, IStrokeReceive
 
     protected override void Move(Vector2 direction, Action strokeCompleateAction)
     {
-        if (isDefence)
+        if (isDefense)
         {
             strokeCompleateAction?.Invoke();
             return;
@@ -39,7 +41,7 @@ public class Knight : AEnemy, IStrokeReceive
 
     private void Start()
     {
-        shield.SetActive(isDefence);
+        shield.SetActive(isDefense);
     }
 
     public void OnStroke()
