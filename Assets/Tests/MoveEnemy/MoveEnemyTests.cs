@@ -98,4 +98,38 @@ public class MoveEnemyTests : SceneTestFixture
             player.transform.position == new Vector3(1, 0) &&
             knight.IsDefense);
     }
+
+    [UnityTest]
+    public IEnumerator MoveThief_PositionChanged_ReturnFalse()
+    {
+        yield return LoadScene("Test_MoveThief_PositionChanged");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var thief = Object.FindObjectOfType<Thief>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(
+            thief.transform.position == new Vector3(4, 0) &&
+            player.transform.position == new Vector3(0, 0));
+    }
+
+    [UnityTest]
+    public IEnumerator KillThief_ThiefDeath_ReturnFalse()
+    {
+        yield return LoadScene("Test_KillThief_ThiefDeath");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var thief = Object.FindObjectOfType<Thief>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(thief == null);
+    }
 }

@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tests/MoveEnemy/Test_ChangeDefenseStateKnight_PositionChanged.unity
     guid: 89e1a3900fbb9c147be73df4392d0b29
+  - enabled: 1
+    path: Assets/Tests/MoveEnemy/Test_MoveThief_PositionChanged.unity
+    guid: 71b13000ec867ea439026387c1efcbe0
+  - enabled: 1
+    path: Assets/Tests/MoveEnemy/Test_KillThief_ThiefDeath.unity
+    guid: a7872efc8f672f84595c22f2b1d8edf1
   m_configObjects: {}
