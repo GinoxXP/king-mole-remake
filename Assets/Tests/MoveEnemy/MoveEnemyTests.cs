@@ -132,4 +132,44 @@ public class MoveEnemyTests : SceneTestFixture
 
         Assert.IsTrue(thief == null);
     }
+
+    [UnityTest]
+    public IEnumerator MoveBerserker_PositionChanged_ReturnFalse()
+    {
+        yield return LoadScene("Test_MoveBerserker_PositionChanged");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var berserker = Object.FindObjectOfType<Berserker>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(
+            berserker.transform.position == new Vector3(2, 0) &&
+            player.transform.position == new Vector3(0, 0));
+    }
+
+    [UnityTest]
+    public IEnumerator KillBerserker_BerserkerDeath_ReturnFalse()
+    {
+        yield return LoadScene("Test_KillBerserker_BerserkerDeath");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var berserker = Object.FindObjectOfType<Berserker>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(berserker == null);
+    }
 }
