@@ -41,4 +41,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tests/MoveEnemy/Test_KillBerserker_BerserkerDeath.unity
     guid: e3d90a8255de1884aa204efb2b87e48c
+  - enabled: 1
+    path: Assets/Tests/MoveEnemy/Test_MoveWizard_PositionChanged.unity
+    guid: 2d08c55442346c14cab3405e2907caef
+  - enabled: 1
+    path: Assets/Tests/MoveEnemy/Test_KillWizard_WizardDeath.unity
+    guid: 0e74ef2b218366045aedf8ca46466f1e
   m_configObjects: {}

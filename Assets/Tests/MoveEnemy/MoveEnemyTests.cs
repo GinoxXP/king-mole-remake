@@ -172,4 +172,50 @@ public class MoveEnemyTests : SceneTestFixture
 
         Assert.IsTrue(berserker == null);
     }
+
+    [UnityTest]
+    public IEnumerator MoveWizard_PositionChanged_ReturnFalse()
+    {
+        yield return LoadScene("Test_MoveWizard_PositionChanged");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var wizard = Object.FindObjectOfType<Wizard>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(
+            wizard.transform.position == new Vector3(2, 0) &&
+            player.transform.position == new Vector3(0, 0));
+    }
+
+    [UnityTest]
+    public IEnumerator KillWizard_WizardDeath_ReturnFalse()
+    {
+        yield return LoadScene("Test_KillWizard_WizardDeath");
+        yield return new WaitForSeconds(1.0f);
+
+        var player = SceneContainer.Resolve<Player>();
+
+        var wizard = Object.FindObjectOfType<Wizard>();
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        player.SetMoveDirection(Vector3.right);
+        yield return new WaitForSeconds(1.0f);
+
+        Assert.IsTrue(wizard == null);
+    }
 }

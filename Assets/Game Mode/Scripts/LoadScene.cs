@@ -35,6 +35,9 @@ public class LoadScene : MonoBehaviour
 
     private IEnumerator LoadCoroutine(bool isPermanent)
     {
+        if (string.IsNullOrEmpty(sceneName) || string.IsNullOrWhiteSpace(sceneName))
+            yield break;
+
         if (!isPermanent)
             yield return new WaitForSeconds(delay);
 
