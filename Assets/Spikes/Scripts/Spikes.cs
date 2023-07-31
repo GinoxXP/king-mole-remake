@@ -12,6 +12,8 @@ public class Spikes : MonoBehaviour, IStrokeReceive
 
     private ISpikesStep spikesStep;
 
+    public bool IsActivated => isActivated;
+
     public void ChangeState(bool? state = null)
     {
         if (state.HasValue)
