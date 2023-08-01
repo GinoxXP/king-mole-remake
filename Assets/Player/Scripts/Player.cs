@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -25,8 +26,13 @@ public class Player : MonoBehaviour, ISpikesStep
 
         var moveDirection = context.ReadValue<Vector2>().normalized;
 
-        var hits = Physics2D.RaycastAll(transform.position, moveDirection, 1);
-        Debug.DrawRay(transform.position, moveDirection, Color.white, 0.2f);
+        SetMoveDirection(moveDirection);
+    }
+
+    public void SetMoveDirection(Vector2 direction)
+    {
+        var hits = Physics2D.RaycastAll(transform.position, direction, 1);
+        Debug.DrawRay(transform.position, direction, Color.white, 0.2f);
 
         foreach (var hit in hits)
         {
@@ -41,12 +47,12 @@ public class Player : MonoBehaviour, ISpikesStep
             {
                 StrokeStarted?.Invoke();
 
-                iPushed.Push(this, moveDirection, () => StrokeCompleated?.Invoke());
+                iPushed.Push(this, direction, () => StrokeCompleated?.Invoke());
                 return;
             }
         }
 
-        Move(moveDirection);
+        Move(direction);
     }
 
     public void StepOnSpike()
