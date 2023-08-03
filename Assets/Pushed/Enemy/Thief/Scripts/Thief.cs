@@ -37,6 +37,11 @@ public class Thief : AEnemy
 
     private Vector3 RoundVector(Vector3 point, Vector2 direction)
     {
+        point = new Vector3(
+            (float)Math.Round(point.x, 1),
+            (float)Math.Round(point.y, 1),
+            (float)Math.Round(point.z, 1));
+
         var roundedVector = new Vector3(
             direction.x > 0 ? Mathf.RoundToInt(point.x) : Mathf.CeilToInt(point.x),
             Mathf.RoundToInt(point.y),
