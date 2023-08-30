@@ -34,7 +34,7 @@ public abstract class AMoved : MonoBehaviour, IPushed
         Move(direction, action);
     }
 
-    protected abstract void CantMove();
+    protected virtual void CantMove() { }
 
     protected virtual void Move(Vector2 direction, Action strokeCompleateAction)
     {
