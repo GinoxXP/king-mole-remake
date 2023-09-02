@@ -1,12 +1,14 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour, ISpikesStep
 {
+    private Animator animator;
+
     [SerializeField]
     private float moveDuration;
 
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour, ISpikesStep
                 StrokeStarted?.Invoke();
 
                 iPushed.Push(this, direction, () => StrokeCompleated?.Invoke());
+                animator.Play("Hit");
                 return;
             }
         }
@@ -73,5 +76,10 @@ public class Player : MonoBehaviour, ISpikesStep
                 IsCanMove = true;
                 StrokeCompleated?.Invoke();
             });
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
     }
 }
