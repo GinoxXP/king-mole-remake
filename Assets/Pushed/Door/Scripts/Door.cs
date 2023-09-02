@@ -5,9 +5,8 @@ using UnityEngine;
 public class Door : MonoBehaviour, IPushed
 {
     private new BoxCollider2D collider;
+    private Animator animator;
 
-    [SerializeField]
-    private GameObject door;
     [SerializeField]
     private int id;
 
@@ -22,7 +21,7 @@ public class Door : MonoBehaviour, IPushed
         else
             isOpen = !isOpen;
 
-        door.SetActive(!isOpen);
+        animator.Play(isOpen ? "Open" : "Close");
         collider.enabled = !isOpen;
     }
 
@@ -34,5 +33,6 @@ public class Door : MonoBehaviour, IPushed
     private void Start()
     {
         collider = GetComponent<BoxCollider2D>();
+        animator = GetComponentInChildren<Animator>();
     }
 }
