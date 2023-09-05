@@ -8,6 +8,7 @@ using static UnityEngine.InputSystem.InputAction;
 public class Player : MonoBehaviour, ISpikesStep
 {
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
 
     [SerializeField]
     private float moveDuration;
@@ -36,6 +37,11 @@ public class Player : MonoBehaviour, ISpikesStep
     public void SetMoveDirection(Vector2 direction)
     {
         IsCanMove = false;
+
+        if (direction.x < 0)
+            spriteRenderer.flipX = true;
+        else if (direction.x > 0)
+            spriteRenderer.flipX = false;
 
         var hits = Physics2D.RaycastAll(transform.position, direction, 1);
         Debug.DrawRay(transform.position, direction, Color.white, 0.2f);
@@ -98,5 +104,6 @@ public class Player : MonoBehaviour, ISpikesStep
     private void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 }
