@@ -12,6 +12,8 @@ public class Player : MonoBehaviour, ISpikesStep
     [SerializeField]
     private float moveDuration;
 
+    private IPushed targetPushed;
+
     public bool IsCanMove { get; set; } = true;
 
     public event Action StrokeStarted;
@@ -33,6 +35,8 @@ public class Player : MonoBehaviour, ISpikesStep
 
     public void SetMoveDirection(Vector2 direction)
     {
+        IsCanMove = false;
+
         var hits = Physics2D.RaycastAll(transform.position, direction, 1);
         Debug.DrawRay(transform.position, direction, Color.white, 0.2f);
 
@@ -49,13 +53,26 @@ public class Player : MonoBehaviour, ISpikesStep
             {
                 StrokeStarted?.Invoke();
 
-                iPushed.Push(this, direction, () => StrokeCompleated?.Invoke());
+                iPushed.RegisterPush(direction, () =>
+                {
+                    StrokeCompleated?.Invoke();
+                    IsCanMove = true;
+                });
+                targetPushed = iPushed;
+
                 animator.Play("Hit");
                 return;
             }
         }
 
         Move(direction);
+
+        IsCanMove = true;
+    }
+
+    public void OnHit()
+    {
+        targetPushed.ExecutePush();
     }
 
     public void StepOnSpike()

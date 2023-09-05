@@ -11,6 +11,7 @@ public class Door : MonoBehaviour, IPushed
     private int id;
 
     private bool isOpen;
+    private Action pushAction;
 
     public int ID => id;
 
@@ -25,9 +26,15 @@ public class Door : MonoBehaviour, IPushed
         collider.enabled = !isOpen;
     }
 
-    public void Push(Player player, Vector2 direction, Action strokeCompleateAction = null)
+    public void ExecutePush()
+        => pushAction?.Invoke();
+
+    public void RegisterPush(Vector2 direction, Action strokeCompleateAction = null)
     {
-        strokeCompleateAction?.Invoke();
+        pushAction = () =>
+        {
+            strokeCompleateAction?.Invoke();
+        };
     }
 
     private void Start()

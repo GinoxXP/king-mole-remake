@@ -6,10 +6,13 @@ public class Chest : AMoved
 {
     private Animator animator;
 
-    public override void Push(Player player, Vector2 direction, Action action)
+    public override void RegisterPush(Vector2 direction, Action action)
     {
-        base.Push(player, direction, action);
-        animator.Play("Push");
+        base.RegisterPush(direction, () =>
+        {
+            animator.Play("Push");
+            action?.Invoke();
+        });
     }
 
     private void Start()
