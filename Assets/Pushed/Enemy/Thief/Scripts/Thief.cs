@@ -6,7 +6,7 @@ public class Thief : AEnemy
 {
     private Vector3 targetPosition;
 
-    public override void Push(Player player, Vector2 direction, Action strokeCompleateAction)
+    public override void RegisterPush(Vector2 direction, Action strokeCompleateAction)
     {
         var hits = Physics2D.RaycastAll(transform.position, direction);
         Debug.DrawRay(transform.position, direction, Color.magenta, 0.2f);
@@ -21,7 +21,7 @@ public class Thief : AEnemy
             break;
         }
 
-        base.Push(player, direction, strokeCompleateAction);
+        base.RegisterPush(direction, strokeCompleateAction);
     }
 
     protected override void Move(Vector2 direction, Action strokeCompleateAction)

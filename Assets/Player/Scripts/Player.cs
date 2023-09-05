@@ -1,14 +1,19 @@
 using DG.Tweening;
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour, ISpikesStep
 {
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
     [SerializeField]
     private float moveDuration;
+
+    private IPushed targetPushed;
 
     public bool IsCanMove { get; set; } = true;
 
@@ -31,6 +36,13 @@ public class Player : MonoBehaviour, ISpikesStep
 
     public void SetMoveDirection(Vector2 direction)
     {
+        IsCanMove = false;
+
+        if (direction.x < 0)
+            spriteRenderer.flipX = true;
+        else if (direction.x > 0)
+            spriteRenderer.flipX = false;
+
         var hits = Physics2D.RaycastAll(transform.position, direction, 1);
         Debug.DrawRay(transform.position, direction, Color.white, 0.2f);
 
@@ -47,12 +59,26 @@ public class Player : MonoBehaviour, ISpikesStep
             {
                 StrokeStarted?.Invoke();
 
-                iPushed.Push(this, direction, () => StrokeCompleated?.Invoke());
+                iPushed.RegisterPush(direction, () =>
+                {
+                    StrokeCompleated?.Invoke();
+                    IsCanMove = true;
+                });
+                targetPushed = iPushed;
+
+                animator.Play("Hit");
                 return;
             }
         }
 
         Move(direction);
+
+        IsCanMove = true;
+    }
+
+    public void OnHit()
+    {
+        targetPushed.ExecutePush();
     }
 
     public void StepOnSpike()
@@ -73,5 +99,11 @@ public class Player : MonoBehaviour, ISpikesStep
                 IsCanMove = true;
                 StrokeCompleated?.Invoke();
             });
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 }

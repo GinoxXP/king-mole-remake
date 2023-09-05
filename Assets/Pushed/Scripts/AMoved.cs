@@ -9,7 +9,19 @@ public abstract class AMoved : MonoBehaviour, IPushed
 
     protected bool isCanMove = true;
 
-    public virtual void Push(Player player, Vector2 direction, Action action)
+    private Action pushAction;
+    private Vector2 direction;
+    private Action action;
+
+    public virtual void RegisterPush(Vector2 direction, Action action)
+    {
+        pushAction = () => Push();
+
+        this.direction = direction;
+        this.action = action;
+    }
+
+    public virtual void Push()
     {
         if (!isCanMove)
             return;
@@ -33,6 +45,9 @@ public abstract class AMoved : MonoBehaviour, IPushed
 
         Move(direction, action);
     }
+
+    public void ExecutePush()
+        => pushAction?.Invoke();
 
     protected virtual void CantMove() { }
 
