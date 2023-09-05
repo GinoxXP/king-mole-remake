@@ -12,6 +12,7 @@ public class Door : MonoBehaviour, IPushed
 
     private bool isOpen;
     private Action pushAction;
+    private Action action;
 
     public int ID => id;
 
@@ -29,12 +30,16 @@ public class Door : MonoBehaviour, IPushed
     public void ExecutePush()
         => pushAction?.Invoke();
 
+    public void Push()
+    {
+        action?.Invoke();
+    }
+
     public void RegisterPush(Vector2 direction, Action strokeCompleateAction = null)
     {
-        pushAction = () =>
-        {
-            strokeCompleateAction?.Invoke();
-        };
+        pushAction = () => Push();
+
+        this.action = strokeCompleateAction;
     }
 
     private void Start()
