@@ -53,7 +53,10 @@ public class Player : MonoBehaviour, ISpikesStep
                 continue;
 
             if (hit.collider.tag == "Wall")
+            {
+                IsCanMove = true;
                 return;
+            }
 
             if (hit.collider.TryGetComponent<IPushed>(out var iPushed))
             {
